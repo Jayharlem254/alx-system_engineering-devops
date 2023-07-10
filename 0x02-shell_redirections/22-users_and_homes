@@ -1,0 +1,8 @@
+#!/bin/bash
+users=$(awk -F: '{print $1}' /etc/passwd)
+home_dirs=$(awk -F: '{print $6}' /etc/passwd)
+mapfile -t users_and_dirs < <(paste -d: <(echo "$users") <(echo "$home_dirs"))
+sorted_users_and_dirs=($(printf "%s\n" "${users_and_dirs[@]}" | sort))
+for entry in "${sorted_users_and_dirs[@]}"; do
+  IFS=':' read -ra parts <<< "$entry"
+  echo "${parts[0]}:${parts[1]}"
