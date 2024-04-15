@@ -1,0 +1,17 @@
+Explanation of the diagram:
+
+DNS Resolution: The browser first resolves the domain name "www.google.com" to an IP address using the DNS (Domain Name System).
+
+Request to Server IP on Port: The browser then sends an HTTPS request to the server's IP address on port 443, the default port for HTTPS.
+
+Encrypted Traffic: The request is encrypted using the HTTPS protocol, ensuring secure communication between the browser and the server.
+
+Firewall: The request passes through a firewall, which acts as a security barrier, monitoring and controlling incoming and outgoing network traffic.
+
+Load Balancer: The request may be distributed across multiple servers using a load balancer, which helps distribute traffic evenly to ensure high availability and reliability.
+
+Web Server Response: The web server receives the request, processes it, and responds by serving a web page (e.g., the Google search page).
+
+Application Server: In some cases, the web server may communicate with an application server to generate the web page dynamically (not shown in the diagram).
+
+Database Interaction: The application server may request data from a database to include in the web page (not shown in the diagram).

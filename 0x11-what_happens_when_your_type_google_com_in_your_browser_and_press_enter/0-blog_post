@@ -1,0 +1,19 @@
+When you type https://www.google.com into your browser and press Enter, a complex series of steps occur behind the scenes to bring you the Google homepage. Let's break down each step of this process:
+
+DNS Request: The first step is translating the human-readable URL (https://www.google.com) into an IP address. Your browser sends a Domain Name System (DNS) request to a DNS server to get the IP address associated with the domain name "www.google.com".
+
+TCP/IP: Once the IP address is obtained, your browser establishes a Transmission Control Protocol (TCP) connection with the server at that IP address. TCP ensures that the data sent between your browser and the server is reliably transmitted.
+
+Firewall: If a firewall is in place, it checks the incoming and outgoing traffic to ensure it meets security rules. If everything is in order, the request is allowed to proceed.
+
+HTTPS/SSL: If the website uses HTTPS (Hypertext Transfer Protocol Secure), as Google does, an additional step is taken to establish a secure connection. This involves the browser and the server agreeing on encryption methods and exchanging cryptographic keys.
+
+Load Balancer: For large websites like Google, there are often multiple servers handling incoming requests. A load balancer distributes the incoming traffic across these servers to ensure no single server is overwhelmed.
+
+Web Server: Once the request reaches a server, a web server (like Apache or Nginx) processes the request. It retrieves the requested web page (in this case, the Google homepage) and sends it back to the browser.
+
+Application Server: In some cases, there may be an application server involved, especially for dynamic content. The application server processes the request, interacts with databases or other services, and generates the final content to be sent back to the browser.
+
+Database: If the web page requires data from a database (e.g., search results), the application server retrieves this data from the database server and incorporates it into the web page.
+
+Response: Finally, the fully formed web page is sent back to your browser via the established TCP connection. Your browser receives the response, renders the HTML, CSS, and JavaScript, and displays the Google homepage you requested.
