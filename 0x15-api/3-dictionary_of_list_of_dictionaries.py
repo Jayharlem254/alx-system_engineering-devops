@@ -1,35 +1,39 @@
 #!/usr/bin/python3
-"""python script to fetch Rest API for todo lists of employees"""
+"""Request employee ID from API
+"""
 
-import json
+from json import dump
 import requests
-import sys
 
+if __name__ == "__main__":
 
-if __name__ == '__main__':
-    url = "https://jsonplaceholder.typicode.com/users"
+    def make_request(resource, param=None):
+        """Retrieve user from API
+        """
+        url = 'https://jsonplaceholder.typicode.com/'
+        url += resource
+        if param:
+            url += ('?' + param[0] + '=' + param[1])
 
-    resp = requests.get(url)
-    Users = resp.json()
+        # make request
+        r = requests.get(url)
 
-    users_dict = {}
-    for user in Users:
-        USER_ID = user.get('id')
-        USERNAME = user.get('username')
-        url = 'https://jsonplaceholder.typicode.com/users/{}'.format(USER_ID)
-        url = url + '/todos/'
-        resp = requests.get(url)
+        # extract json response
+        r = r.json()
+        return r
 
-        tasks = resp.json()
-        users_dict[USER_ID] = []
-        for task in tasks:
-            TASK_COMPLETED_STATUS = task.get('completed')
-            TASK_TITLE = task.get('title')
-            users_dict[USER_ID].append({
-                "task": TASK_TITLE,
-                "completed": TASK_COMPLETED_STATUS,
-                "username": USERNAME
-            })
-            """A little Something"""
-    with open('todo_all_employees.json', 'w') as f:
-        json.dump(users_dict, f)
+    export = {}
+
+    users = make_request('users')
+    for user in users:
+        user_id = user['id']
+        export.update({user_id: []})
+        tasks_by_user = make_request('todos', ('userId', str(user_id)))
+        for task in tasks_by_user:
+            export[user_id].append({'username': user['username'],
+                                    'task': task['title'],
+                                    'completed': task['completed']})
+
+    filename = 'todo_all_employees.json'
+    with open(filename, mode='w') as f:
+        dump(export, f)
